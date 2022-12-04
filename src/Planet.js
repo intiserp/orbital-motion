@@ -5,20 +5,20 @@ import { calculateAcceleration, calculateAngularAcceleration, calculateNextValue
 import constants from './constants';
 import './Planet.css';
 
-const Planet = ({ planetName }) => {
-  const [distance, setDistance] = useState(constants.distance[planetName]);
+const Planet = ({ name, sunMassMultiplier = 1, speed = 1, show }) => {
+  const [distance, setDistance] = useState(constants.distance[name]);
   const [velocity, setVelocity] = useState(0);
   const [angle, setAngle] = useState(Math.PI / 6);
-  const [angularVelocity, setAngularVelocity] = useState(constants.angularVelocity[planetName]);
+  const [angularVelocity, setAngularVelocity] = useState(constants.angularVelocity[name]);
   let [x, setX] = useState(0);
   let [y, setY] = useState(0);
 
   const interval = 0.00001; // in ms
-  const pixelToMeters = 100;
+  const pixelToMeters = 20;
   const scale = constants.distance.earth / pixelToMeters; // pixelToMeters pixels = 1 earth distance
   const delta = 3600 * 24 / 10; // 1 day in ms
 
-  const planetElement = document.getElementById(planetName);
+  const planetElement = document.getElementById(name);
 
   // 1. every interval, calculate the acceleration and angular acceleration
   // 2. from the acceleration and angular acceleration, calculate the next velocity and angular velocity
@@ -41,13 +41,19 @@ const Planet = ({ planetName }) => {
       setX(nextDistance * Math.cos(nextAngle) / scale);
       setY(nextDistance * Math.sin(nextAngle) / scale);
 
-      planetElement.style.transform = `translate(${x}px, ${y}px)`;
+      if (planetElement) {
+        planetElement.style.transform = `translate(${x}px, ${y}px)`;
+      }
     }, interval);
     return () => clearInterval(intervalId);
-  }, [distance, velocity, angle, angularVelocity]);
+  }, [distance, velocity, angle, angularVelocity, x, y]);
+
+  if (!show) {
+    return null;
+  }
 
   return (
-    <img id={planetName} className="planet" src={`./planet-${planetName}.png`} alt={planetName} />
+    <img id={name} className="planet" src={`./planet-${name}.png`} alt={name} />
   );
 }
 

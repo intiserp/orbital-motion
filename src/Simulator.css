@@ -1,13 +1,76 @@
 .body {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url("../public/space.jpg") no-repeat center center;
-    background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../public/space.jpg") no-repeat center center;
+  background-size: cover;
+
+  /* disable scrolling */
+  overflow: hidden;
 }
 
 .sun {
-    width: 50px;
+  width: 25px;
+}
+
+.settingsDiv {
+  width: 250px;
+  position: absolute;
+  left: 0;
+  height: 90%;
+  border-radius: 0 30px 30px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.settingsPlanet {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.resetButton {
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 25px;
+  color: white !important;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.resetButton:hover {
+  /* Invert colors and translate up a bit */
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+  transform: translateY(-2px);
+}
+
+.slider {
+  width: 200px;
+  margin: 10px 0;
+}
+
+.MuiFormLabel-colorPrimary {
+  color: white !important;
+}
+
+.MuiSwitch-thumb {
+  /* this is to customize the icon */
+}
+
+/* If switch is off, color should be white. If switch on, color is red */
+.MuiSwitch-track {
+  background-color: white !important;
+}
+
+.MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  /* background-color: teal !important; */
 }
