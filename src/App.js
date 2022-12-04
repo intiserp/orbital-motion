@@ -1,10 +1,10 @@
 import './App.css';
+import Simulator from './Simulator';
 
 function App() {
   return (
     <div className="App">
-      Welcome to the Orbital Motion Simulator!
-      Click 
+      <Simulator />
     </div>
   );
 }
