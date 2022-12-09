@@ -1,7 +1,7 @@
 import constants from "./constants";
 
-export const calculateAcceleration = (distance, angularVelocity) => {
-  return distance * Math.pow(angularVelocity, 2) - constants.gravitationalConstant * constants.sunMass / Math.pow(distance, 2);
+export const calculateAcceleration = (distance, angularVelocity, sunMassMultiplier = 1) => {
+  return distance * Math.pow(angularVelocity, 2) - constants.gravitationalConstant * constants.sunMass * sunMassMultiplier / Math.pow(distance, 2);
 }
 
 export const calculateAngularAcceleration = (distance, velocity, angularVelocity) => {

@@ -26,7 +26,7 @@ const constants = {
     uranus: 2 * Math.PI / (30589 * 86400),
     neptune: 2 * Math.PI / (59800 * 86400),
     pluto: 2 * Math.PI / (90560 * 86400)
-  }
+  },
 };
 
 

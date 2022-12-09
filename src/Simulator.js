@@ -22,6 +22,7 @@ const Simulator = () => {
     neptune: false,
     sunMassMultiplier: 1,
     speed: 1,
+    trueDistance: true,
   });
 
   const handleChange = (event) => {
@@ -32,16 +33,20 @@ const Simulator = () => {
     setSettings({ ...settings, [event.target.name]: newValue });
   };
 
+  // keep a reference to each planet's ref
+  const planetRefs = planets.reduce((acc, planet) => {
+    acc[planet] = React.createRef();
+    return acc;
+  }, {});
+
   const resetSettings = () => {
+    // reset each planet's settings
+    planets.forEach((planet) => {
+      planetRefs[planet].current.resetSettings();
+    });
+    // reset simulator settings
     setSettings({
-      mercury: false,
-      venus: false,
-      earth: true,
-      mars: false,
-      jupiter: false,
-      saturn: false,
-      uranus: false,
-      neptune: false,
+      ...settings,
       sunMassMultiplier: 1,
       speed: 1,
     });
@@ -86,20 +91,33 @@ const Simulator = () => {
           valueLabelDisplay="auto"
           value={settings.speed}
           step={0.1}
-          min={0}
+          min={.01}
           max={2}
           onChange={handleSliderChange}
+        />
+        <FormControlLabel
+          className="settingsPlanet"
+          control={
+            <Switch
+              checked={settings.trueDistance}
+              onChange={handleChange}
+              name="trueDistance"
+            />
+          }
+          label="True Distance"
         />
         <button className="resetButton" onClick={resetSettings}>Reset</button>
       </div>
       <img className="sun" src="./sun.png" alt="sun" />
       {planets.map((planet) => (
         <Planet
+          ref={planetRefs[planet]}
           key={planet}
           name={planet.toLowerCase()}
           sunMassMultiplier={settings.sunMassMultiplier}
           speed={settings.speed}
           show={settings[planet.toLowerCase()]}
+          trueDistance={settings.trueDistance}
         />
       ))}
     </div>
