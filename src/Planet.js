@@ -66,7 +66,7 @@ const Planet = forwardRef((props, ref) => {
       }
     }, interval);
     return () => clearInterval(intervalId);
-  }, [distance, velocity, angle, angularVelocity, x, y]);
+  }, [distance, velocity, angle, angularVelocity, x, y, planetElement, props.sunMassMultiplier, delta, scale]);
 
   if (!props.show) {
     return null;
