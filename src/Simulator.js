@@ -22,7 +22,6 @@ const Simulator = () => {
     neptune: false,
     sunMassMultiplier: 1,
     speed: 1,
-    trueDistance: true,
   });
 
   const handleChange = (event) => {
@@ -95,17 +94,6 @@ const Simulator = () => {
           max={2}
           onChange={handleSliderChange}
         />
-        <FormControlLabel
-          className="settingsPlanet"
-          control={
-            <Switch
-              checked={settings.trueDistance}
-              onChange={handleChange}
-              name="trueDistance"
-            />
-          }
-          label="True Distance"
-        />
         <button className="resetButton" onClick={resetSettings}>Reset</button>
       </div>
       <img className="sun" src="./sun.png" alt="sun" />
@@ -117,7 +105,6 @@ const Simulator = () => {
           sunMassMultiplier={settings.sunMassMultiplier}
           speed={settings.speed}
           show={settings[planet.toLowerCase()]}
-          trueDistance={settings.trueDistance}
         />
       ))}
     </div>
